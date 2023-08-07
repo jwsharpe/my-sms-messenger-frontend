@@ -14,7 +14,16 @@
             placeholder="email@email.com"
             required
             [(ngModel)]="signInEmail"
+            #emailInput="ngModel"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
           />
+          <div
+            class="error-message"
+            *ngIf="emailInput.invalid && emailInput.touched"
+          >
+            Email is required and must be in a valid format, ex:
+            email@email.com.
+          </div>
         </div>
 
         <div class="form-group">
@@ -45,7 +54,16 @@
             placeholder="email@email.com"
             required
             [(ngModel)]="signUpEmail"
+            #emailInput="ngModel"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
           />
+          <div
+            class="error-message"
+            *ngIf="emailInput.invalid && emailInput.touched"
+          >
+            Email is required and must be in a valid format, ex:
+            email@email.com.
+          </div>
         </div>
 
         <div class="form-group">
@@ -56,7 +74,15 @@
             name="signup-password"
             required
             [(ngModel)]="signUpPassword"
+            #passwordInput="ngModel"
+            minlength="6"
           />
+          <div
+            class="error-message"
+            *ngIf="passwordInput.invalid && passwordInput.touched"
+          >
+            Password is required and must be at least 6 characters long.
+          </div>
         </div>
 
         <div class="form-group">
@@ -67,7 +93,15 @@
             name="confirm-password"
             required
             [(ngModel)]="confirmPassword"
+            #confirmPasswordInput="ngModel"
+            minlength="6"
           />
+          <div
+            class="error-message"
+            *ngIf="confirmPasswordInput.invalid && confirmPasswordInput.touched"
+          >
+            Confirm Password is required and must be at least 6 characters long.
+          </div>
         </div>
 
         <button type="submit">Register</button>
