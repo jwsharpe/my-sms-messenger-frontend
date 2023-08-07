@@ -10,6 +10,9 @@ import { SmsFormComponent } from './dashboard/sms-form/sms-form.component';
 import { SmsSentHistoryComponent } from './dashboard/sms-sent-history/sms-sent-history.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { AuthService } from './auth/auth.service';
+import { authGuard } from './auth/auth.guard';
 
 @NgModule({
   declarations: [
@@ -21,10 +24,15 @@ import { AuthInterceptor } from './auth/auth.interceptor';
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [
+    AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
+    },
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy,
     },
   ],
   bootstrap: [AppComponent],
