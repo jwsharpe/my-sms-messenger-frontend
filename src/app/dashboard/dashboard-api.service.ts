@@ -1,16 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DashboardApiService {
-  private apiBaseUrl = 'http://localhost:3000/api/v1'; // Replace with your API base URL
-  private apiKey =
-    '6xVXB55YWJkD1UzpKWB5_CyDgEyHGqaGax3BUQS_PzjpGxV129bLZSDGkdpL'; // Replace with your API key
+  private apiBaseUrl = environment.dashboardApiBaseUrl;
 
   constructor(private http: HttpClient) {}
 

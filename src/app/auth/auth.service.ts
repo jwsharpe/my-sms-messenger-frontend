@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiBaseUrl = 'http://localhost:3000'; // Replace with your API base URL
+  private apiBaseUrl = environment.authApiBaseUrl;
   private tokenKey = 'token';
 
   constructor(private http: HttpClient) {}
 
   signIn(email: string, password: string): Observable<any> {
-    const url = `${this.apiBaseUrl}/users/tokens/sign_in`;
+    const url = `${this.apiBaseUrl}/sign_in`;
     const data = { email, password };
     return this.http.post(url, data).pipe(
       map((response: any) => {
@@ -23,7 +24,7 @@ export class AuthService {
   }
 
   signUp(email: string, password: string): Observable<any> {
-    const url = `${this.apiBaseUrl}/users/tokens/sign_up`;
+    const url = `${this.apiBaseUrl}/sign_up`;
     const data = { email, password };
     return this.http.post(url, data).pipe(
       map((response: any) => {
