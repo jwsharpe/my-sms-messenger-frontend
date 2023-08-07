@@ -25,7 +25,7 @@ export class DashboardApiService {
     return this.http.get(url, { headers }).pipe(
       catchError((error) => {
         console.error('Error fetching sent history:', error);
-        return throwError(error);
+        return [];
       })
     );
   }
@@ -37,7 +37,7 @@ export class DashboardApiService {
     return this.http.post(url, body, { headers }).pipe(
       catchError((error) => {
         console.error('Error submitting SMS:', error);
-        return throwError(error);
+        return throwError(() => new Error(error));
       })
     );
   }

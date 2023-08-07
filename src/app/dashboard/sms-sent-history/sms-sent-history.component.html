@@ -1,16 +1,21 @@
 <div class="sms-sent-history-container">
   <h2>Message History ({{ sentHistory.length }})</h2>
   <ul class="sms-list">
-    <li *ngFor="let sms of sentHistory" class="sms-item">
-      <div class="top-info">
-        <div class="phone-number">{{ sms.phone_number }}</div>
-        <div class="date">{{ sms.created_at | date : "medium" }}</div>
-      </div>
-      <div class="body-message">{{ sms.body }}</div>
-      <div class="bottom-info">
-        <div class="status">{{ sms.status }}</div>
-        <div class="message-length">{{ sms.body.length }} / 250</div>
-      </div>
-    </li>
+    <ng-container *ngIf="sentHistory.length > 0; else noMessages">
+      <li *ngFor="let sms of sentHistory" class="sms-item">
+        <div class="top-info">
+          <div class="phone-number">{{ sms.phone_number }}</div>
+          <div class="date">{{ sms.created_at | date : "medium" }}</div>
+        </div>
+        <div class="body-message">{{ sms.body }}</div>
+        <div class="bottom-info">
+          <div class="status">{{ sms.status }}</div>
+          <div class="message-length">{{ sms.body.length }} / 250</div>
+        </div>
+      </li>
+    </ng-container>
+    <ng-template #noMessages>
+      <li class="no-messages">No messages found.</li>
+    </ng-template>
   </ul>
 </div>
