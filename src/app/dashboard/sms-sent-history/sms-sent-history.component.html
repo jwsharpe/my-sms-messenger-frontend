@@ -1,0 +1,11 @@
+<div class="sms-sent-history-container">
+  <h2>Message History (NUMBER)</h2>
+  <ul>
+    <li *ngFor="let sms of sentHistory">
+      <div><strong>Phone Number:</strong> {{ sms.phone_number }}</div>
+      <div><strong>Date:</strong> {{ sms.created_at | date : "medium" }}</div>
+      <div><strong>Message:</strong> {{ sms.body }}</div>
+      <div><strong>Message Length:</strong> {{ sms.body.length }}</div>
+    </li>
+  </ul>
+</div>
