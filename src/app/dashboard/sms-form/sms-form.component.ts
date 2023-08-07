@@ -9,8 +9,18 @@ import { DashboardApiService } from '../dashboard-api.service';
 export class SmsFormComponent {
   phoneNumber: string = '';
   message: string = '';
+  messageLength: number = 0;
 
   constructor(private apiService: DashboardApiService) {} // Inject your API service
+
+  clearForm() {
+    this.phoneNumber = '';
+    this.message = '';
+  }
+
+  updateMessageLength() {
+    this.messageLength = this.message.length;
+  }
 
   submitSmsForm() {
     if (this.phoneNumber && this.message) {
