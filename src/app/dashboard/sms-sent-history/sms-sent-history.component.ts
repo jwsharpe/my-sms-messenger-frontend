@@ -1,3 +1,4 @@
+import { SmsSentHistoryPollingService } from './sms-sent-history-polling.service';
 import { Component, OnInit } from '@angular/core';
 import { DashboardApiService } from '../dashboard-api.service';
 
@@ -9,17 +10,11 @@ import { DashboardApiService } from '../dashboard-api.service';
 export class SmsSentHistoryComponent implements OnInit {
   sentHistory: any[] = []; // Modify the data type as needed
 
-  constructor(private apiService: DashboardApiService) {} // Inject your API service
+  constructor(private pollingService: SmsSentHistoryPollingService) {}
 
-  ngOnInit() {
-    // Fetch and populate sent history data
-    this.apiService.getSentHistory().subscribe(
-      (data) => {
-        this.sentHistory = data;
-      },
-      (error) => {
-        console.error('Error fetching sent history:', error);
-      }
-    );
+  ngOnInit(): void {
+    this.pollingService.pollSentHistory(500).subscribe((history) => {
+      this.sentHistory = history;
+    });
   }
 }
