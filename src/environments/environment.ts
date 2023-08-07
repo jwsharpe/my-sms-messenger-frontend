@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
-  authApiBaseUrl: 'https://my-sms-messenger-backend.onrender.com/users/tokens',
-  dashboardApiBaseUrl: 'https://my-sms-messenger-backend.onrender.com/api/v1',
+  production: false,
+  authApiBaseUrl: 'http://localhost:3000/users/tokens',
+  dashboardApiBaseUrl: 'http://localhost:3000/api/v1',
 };
