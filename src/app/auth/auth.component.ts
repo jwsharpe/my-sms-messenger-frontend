@@ -18,6 +18,8 @@ export class AuthComponent {
   signUpEmail: string = '';
   signUpPassword: string = '';
   confirmPassword: string = '';
+  signInError: string = '';
+  signUpError: string = '';
 
   constructor(private authService: AuthService, private router: Router) {} // Inject the AuthService
 
@@ -31,12 +33,14 @@ export class AuthComponent {
         .signIn(this.signInEmail, this.signInPassword)
         .pipe(
           catchError((error) => {
-            console.error('Sign In Error:', error);
-            return throwError(error);
+            console.error('Sign In Error:', error.message);
+            this.signInError = error.message;
+            return throwError(() => new Error(error));
           })
         )
         .subscribe((response) => {
           console.log('Sign In Successful:', response);
+          this.signInError = '';
           this.router.navigate(['/dashboard']);
         });
     }
@@ -50,11 +54,13 @@ export class AuthComponent {
           .pipe(
             catchError((error) => {
               console.error('Sign Up Error:', error);
-              return throwError(error);
+              this.signUpError = error.message;
+              return throwError(() => new Error(error));
             })
           )
           .subscribe((response) => {
             console.log('Sign Up Successful:', response);
+            this.signUpError = '';
             this.router.navigate(['/dashboard']);
           });
       } else {

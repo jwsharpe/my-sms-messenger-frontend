@@ -6,46 +6,50 @@
       <h2>Sign In</h2>
       <form #signInForm="ngForm" (ngSubmit)="signIn(signInForm)">
         <div class="form-group">
-          <label for="email">Email:</label>
+          <label for="email">Email</label>
           <input
             type="email"
             id="email"
             name="email"
+            placeholder="email@email.com"
             required
             [(ngModel)]="signInEmail"
           />
         </div>
 
         <div class="form-group">
-          <label for="password">Password:</label>
+          <label for="password">Password</label>
           <input
             type="password"
             id="password"
             name="password"
+            placeholder="password"
             required
             [(ngModel)]="signInPassword"
           />
         </div>
 
         <button type="submit">Login</button>
+        <div *ngIf="signInError" class="error-message">{{ signInError }}</div>
       </form>
     </div>
     <div *ngIf="!isSignIn">
       <h2>Sign Up</h2>
       <form #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm)">
         <div class="form-group">
-          <label for="signup-email">Email:</label>
+          <label for="signup-email">Email</label>
           <input
             type="email"
             id="signup-email"
             name="signup-email"
+            placeholder="email@email.com"
             required
             [(ngModel)]="signUpEmail"
           />
         </div>
 
         <div class="form-group">
-          <label for="signup-password">Password:</label>
+          <label for="signup-password">Password</label>
           <input
             type="password"
             id="signup-password"
@@ -56,7 +60,7 @@
         </div>
 
         <div class="form-group">
-          <label for="confirm-password">Confirm Password:</label>
+          <label for="confirm-password">Confirm Password</label>
           <input
             type="password"
             id="confirm-password"
@@ -67,6 +71,7 @@
         </div>
 
         <button type="submit">Register</button>
+        <div *ngIf="signUpError" class="error-message">{{ signUpError }}</div>
       </form>
     </div>
     <button (click)="toggleForm()">
